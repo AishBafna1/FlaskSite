@@ -1,0 +1,112 @@
+/* Container styles */
+.body-container {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("../static/Images/home.jpg"), url("../static/Images/old.avif");
+    background-attachment: fixed, fixed;
+    background-position: left top, right top;
+    animation: slide-background 5s linear infinite;
+  }
+  
+  @keyframes slide-background {
+    0% {
+      background-position: left top, right top;
+    }
+    100% {
+      background-position: left -2000px, right -2000px;
+    }
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    background-color: #000000;
+    padding: 10px 0;
+  }
+  
+  .navbar-brand {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+  }
+  
+  .navbar-nav {
+    margin-left: auto;
+  }
+  
+  /* Form container styles */
+  .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #f8f9fa;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form title styles */
+  h1 {
+    text-align: center;
+    color: #94447c;
+    margin-bottom: 20px;
+  }
+  
+  /* Form fields styles */
+  div label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  div input[type="text"],
+  div input[type="email"],
+  div input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Submit button styles */
+  div input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #94447c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  div input[type="submit"]:hover {
+    background-color: #762d5c;
+  }
+  
+  /* Error messages styles */
+  div .alert {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  
+  div .alert ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  
+  div .alert li {
+    margin-bottom: 5px;
+  }
+  

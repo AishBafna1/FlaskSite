@@ -1,0 +1,109 @@
+/* Body and Typography */
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #343a40;
+}
+
+.navbar-brand {
+    font-size: 24px;
+}
+
+.navbar-nav .nav-link {
+    color: white;
+}
+
+/* Sliding Text Animation */
+.sliding-text-container {
+    background-color: #94447c;
+    padding: 10px;
+    text-align: center;
+}
+
+.sliding-text {
+    color: #fff;
+    font-size: 18px;
+    margin: 0;
+    animation: slideText 10s linear infinite;
+}
+
+@keyframes slideText {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Form Container */
+.form-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.checkbox-group {
+    display: flex;
+    gap: 20px;
+}
+
+.form-check-label {
+    font-weight: normal;
+}
+
+/* Submit Button */
+.btn-primary {
+    background-color: #94447c;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #793c6e;
+}
+
+/* Table Styling */
+.table {
+    margin-top: 20px;
+}
+
+.table th {
+    background-color: #343a40;
+    color: white;
+}
+
+/* Alert Styling */
+.alert {
+    margin-top: 20px;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Dashboard - Attireforhumanity</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styledash.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/">Attireforhumanity</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/donate">Donate</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/donations">My Donations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/communication">Communication</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="bg-pink text-black text-center py-5">
+      <h1 class="display-4">Welcome to Your Dashboard!</h1>
+    </header>
+
+    <main class="container py-5">
+      <section>
+        <h2>My Donations</h2>
+        <p>View the details of your past donations and their status.</p>
+        <a href="/donations" class="btn btn-primary">View My Donations</a>
+      </section>
+
+      <section>
+        <h2>New Donation</h2>
+        <p>
+          Submit a new donation with the details of the items you wish to
+          donate.
+        </p>
+        <a href="/donate" class="btn btn-primary">Submit New Donation</a>
+      </section>
+
+      <section>
+        <h2>Communication with Admins</h2>
+        <p>Contact the administrators for any queries or concerns.</p>
+        <a href="/communication" class="btn btn-primary">Contact Admins</a>
+      </section>
+    </main>
+
+    <footer class="bg-light text-center py-3">
+      <p>&copy; 2023 Attireforhumanity. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

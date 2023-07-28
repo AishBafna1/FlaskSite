@@ -1,0 +1,60 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Background color for the page */
+  }
+  
+  .container {
+    max-width: 400px;
+    margin: 100px auto; /* Center the container vertically and horizontally */
+    padding: 20px;
+    background-color: #ffffff; /* Background color for the login form */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #94447c;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form input[type='text'],
+  form input[type='password'] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  form button {
+    padding: 10px;
+    background-color: #94447c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #762d5c;
+  }
+  
+  p {
+    text-align: center;
+  }
+  
+  p a {
+    color: #94447c;
+    text-decoration: none;
+  }
+  
+  p a:hover {
+    text-decoration: underline;
+  }
+  

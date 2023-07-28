@@ -1,0 +1,65 @@
+/* styles.css */
+
+/* Body and Typography */
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1,
+  h2,
+  p {
+    margin-top: 0;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #000;
+    padding: 10px 0;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+  }
+  
+  /* Header */
+  header {
+    background-color: #94447c45;
+    color: #fff;
+  }
+  
+  /* Main Content */
+  main.container {
+    padding: 20px;
+  }
+  
+  section {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  /* Registration Button */
+  a.btn.btn-primary {
+    display: inline-block;
+    background-color: #94447c45;
+    color: #000;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    border-color: transparent;
+  }
+  
+  a.btn.btn-primary:hover {
+    background-color: rgb(2, 1, 1);
+    color: #000;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #f8f9fa;
+    color: #212529;
+    padding: 10px;
+  }
+
+  

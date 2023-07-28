@@ -1,0 +1,72 @@
+/* styles.css */
+
+/* Body and Typography */
+body {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin: 0;
+  padding: 0;
+}
+.background-section {
+  background-image: url("../static/Images/Home1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: calc(100vh - 100px); /* Adjust the height to cover remaining viewport */
+  margin-top: 10px; /* Add margin to position after the header */
+
+}
+.navbar-nav .nav-link {
+  color: white;
+}
+.register-button-container {
+  position: absolute;
+  top: 115%; /* Adjust the percentage to move the button up or down on the background */
+  left: 30%; /* Center the button horizontally */
+  transform: translate(-50%, -50%); /* Center the button vertically */
+}
+
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+/* Header */
+header {
+  background-color: #a56981c4;
+  color: #000000;
+
+
+  
+}
+
+/* Main Content */
+main.container {
+  padding: 20px;
+}
+
+
+
+/* Registration Button */
+a.btn.btn-primary {
+  display: inline-block;
+  background-color: #94447c45;
+  color: black;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  border-color: transparent;
+}
+
+a.btn.btn-primary:hover {
+  background-color: rgb(2, 1, 1);
+
+}
+
+/* Footer */
+footer {
+  background-color: #f8f9fa;
+  color: #212529;
+  padding: 10px;
+}

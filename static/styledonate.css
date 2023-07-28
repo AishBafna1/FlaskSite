@@ -1,0 +1,155 @@
+/* styles.css */
+
+/* Form Container */
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #94447c2b;
+  }
+
+ .form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    animation: fade-in 0.5s ease;
+
+  }
+ /* Navbar */
+ .navbar {
+    background-color: #000;
+    padding: 10px 0;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+  }
+  
+  .navbar-nav {
+    margin-left: auto;
+  }
+  
+  .side-animation {
+    position: absolute;
+    top: 150px;
+    left: 10px;
+    width: 430px; /* Adjust the width as per your image size */
+    height: 500px; /* Adjust the height as per your image size */
+  }
+  .image-container {
+    position: absolute;
+    top: 150px; /* Adjust the top positioning as needed */
+    right: 10px; /* Adjust the right positioning as needed */
+  }
+  
+  .corner-image {
+    width: 430px; /* Adjust the width of the image as needed */
+    height: 480px;
+  }
+  
+  /* Form Title */
+  .form-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+ .donation-form {
+    width: 500px;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .btn-primary {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #94447c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #success-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: #28a745;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    border: 2px solid #155724;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  
+  
+  .btn-primary:hover {
+    background-color: #762d5c;
+ }
+ .sliding-text-container {
+    overflow: hidden;
+    position: relative;
+    height: 50px; /* Adjust the height as needed */
+  }
+  
+  .sliding-text-animation {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    animation: slide-text 10s linear infinite;
+  }
+  
+  .sliding-text {
+    font-size: 28px; /* Adjust the font size as needed */
+    color: #020202; /* Adjust the text color as needed */
+    background-color: #31e1312a; /* Adjust the background color as needed */
+    padding: 30px 50px; /* Adjust the padding as needed */
+    white-space: nowrap;
+    font-style: BOLD;
+  }
+  
+  @keyframes slide-text {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  
+ @keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
