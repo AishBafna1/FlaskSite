@@ -41,7 +41,7 @@ class Donation(db.Model):
     contact_info = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     categories = db.Column(db.String(50), nullable=False)
-    additional_item = db.Column(db.String(200))
+    additional_item = db.Column(db.String(200))      
     address = db.Column(db.String(200), nullable=False)
     eircode = db.Column(db.String(10), nullable=False)
     pickup_datetime = db.Column(db.DateTime, nullable=False)
@@ -164,6 +164,12 @@ def logout():
 
     # Redirect the user to the homepage or login page
     return redirect(url_for('homepage1'))
+
+@app.route('/admin')
+def admin_dashboard():
+    # Fetch all donations from the database and pass them to the template
+    all_donations = Donation.query.all()
+    return render_template('admin.html', donations=all_donations)
 
 @app.route('/communication')
 def communication():
