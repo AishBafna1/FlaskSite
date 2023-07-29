@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin - User Questions</title>
+  </head>
+  <body>
+    <h1>Welcome to Admin Dashboard</h1>
+    <h2>User Questions</h2>
+    <ul>
+      {% for question in questions %}
+      <li>
+        <strong>Name:</strong> {{ question.name }}<br />
+        <strong>Email:</strong> {{ question.email }}<br />
+        <strong>Message:</strong> {{ question.message }}<br />
+        <strong>Timestamp:</strong> {{ question.timestamp }}<br />
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

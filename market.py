@@ -47,6 +47,17 @@ class Donation(db.Model):
     pickup_datetime = db.Column(db.DateTime, nullable=False)
     num_boxes = db.Column(db.Integer, nullable=False)
     
+class UserQuestion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<UserQuestion {self.id}>'
+
+    
 # Required callback for Flask-Login to load the current user
 @login_manager.user_loader
 def load_user(user_id):
@@ -171,9 +182,30 @@ def admin_dashboard():
     all_donations = Donation.query.all()
     return render_template('admin.html', donations=all_donations)
 
-@app.route('/communication')
+@app.route('/communication', methods=['GET', 'POST'])
 def communication():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+
+        # Create a new UserQuestion object and save it to the database
+        user_question = UserQuestion(name=name, email=email, message=message)
+        db.session.add(user_question)
+        db.session.commit()
+
+        flash('Your question has been submitted. Thank you!', 'success')
+        return redirect(url_for('communication'))
+
     return render_template('communication.html')
+
+@app.route('/admin/questions')
+def admin_questions():
+    # Retrieve all user questions from the database
+    user_questions = UserQuestion.query.all()
+
+    return render_template('admin_questions.html', questions=user_questions)
+
 
 if __name__ == '__main__':
     # Create the database table
