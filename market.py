@@ -1,10 +1,9 @@
-from xml.dom import registerDOMImplementation
 from flask import Flask, render_template, redirect, request, url_for, flash
 import datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager,UserMixin, login_user, login_required, logout_user, current_user
 
 
 from flask_sqlalchemy import SQLAlchemy
@@ -16,6 +15,7 @@ db = SQLAlchemy(app)
 # Setup Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'login'  # Replace 'login' with the route function name for your login page
 
 class RegistrationForm(FlaskForm):
     full_name = StringField('Full Name', validators=[DataRequired()])
@@ -29,11 +29,14 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
     
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
+    
+    def is_active(self):
+        return self.active  # Replace 'active' with the actual attribute/method that determines if the user is active
     
 class Donation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -52,7 +55,7 @@ class UserQuestion(db.Model):
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return f'<UserQuestion {self.id}>'
@@ -62,6 +65,7 @@ class UserQuestion(db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 @app.route('/')
 def homepage1():
@@ -92,16 +96,20 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
     # Render the user dashboard page
     return render_template('dashboard.html')
 
 @app.route('/donations')
+@login_required
 def donate():
-    all_donations = Donation.query.all()
-    return render_template('donations.html', donations=all_donations)
+    # Retrieve all donations associated with the currently logged-in user
+    user_donations = Donation.query.filter_by(email=current_user.email).all()    
+    return render_template('donations.html', donations=user_donations)
 
 @app.route('/donate', methods=['GET', 'POST'])
+@login_required
 def submit_donation():
     if request.method == 'POST':
         full_name = request.form.get('full_name')
@@ -111,23 +119,15 @@ def submit_donation():
         additional_item = request.form.get('additional_item')
         address = request.form.get('address')
         eircode = request.form.get('eircode')
-        pickup_date = request.form.get('pickup_date')
-        pickup_time = request.form.get('pickup_time')
+        pickup_datetime_str = request.form.get('pickup_datetime')
+
         num_boxes = request.form.get('num_boxes')
 
-
-        if not all([full_name, contact_info, email, categories, address, eircode, pickup_date, pickup_time, num_boxes]):
-            flash('Please fill in all required fields', 'error')
-        else:
-            pickup_datetime = datetime.datetime.strptime(pickup_date + ' ' + pickup_time, '%Y-%m-%d %H:%M')
- 
-            
-            # Check for uniqueness of email before adding the donation
-            if not Donation.query.filter_by(email=email).first():
-
+        if (full_name and contact_info and email and categories and address and eircode and pickup_datetime_str):
+            pickup_datetime = datetime.datetime.strptime(pickup_datetime_str,'%Y-%m-%d %H:%M')
 
             # Create a new Donation object and save it to the database
-                new_donation = Donation(
+            donation = Donation(
                 full_name=full_name,
                 contact_info=contact_info,
                 email=email,
@@ -138,30 +138,50 @@ def submit_donation():
                 pickup_datetime=pickup_datetime,
                 num_boxes=int(num_boxes)
             )
-            db.session.add(new_donation)
+            db.session.add(donation)
             db.session.commit()
-            flash('Donation successfully submitted!', 'success')
-            return redirect(url_for('donate'))
+
+            flash('Donation successfully submitted!', 'success')  # Flash the success message
+            return redirect(url_for('donate'))  # Redirect to the donations page
+        else:
+            flash('Please fill in all required fields', 'error')  # Flash an error message for incomplete form
+
     return render_template('donate.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    print("Login route accessed.")  # Add this print statemen
+        
     form = LoginForm()
 
     if form.validate_on_submit():
         # Process the login form data and check credentials
         email = form.email.data
         password = form.password.data
+        print("Form submitted")  # Add this print statement to check if form is being submitted
 
-        # Validate user credentials against the database
+
+        # Check if the entered credentials belong to the admin user
+        if email == 'admin@gmail.com' and password == 'admin123':
+            flash('Admin login successful!', 'success')
+            admin_user = User.query.filter_by(email=email).first()
+            login_user(admin_user)  # Log in the admin user
+            if current_user.is_authenticated:
+                print("Regular user authenticated.")  # Add this print statement
+
+                return redirect(url_for('admin_dashboard'))  # Redirect to the admin dashboard
+
+        # Validate regular user credentials against the database
         user = User.query.filter_by(email=email).first()
+
         if user and user.password == password:
             # Successful login
             flash('Login successful!', 'success')
-            return redirect(url_for('dashboard'))
+            login_user(user)  # Log in the regular user
+            if current_user.is_authenticated:
+                return redirect(url_for('dashboard'))  # Redirect to the regular user's dashboard
         else:
             flash('Invalid email or password', 'error')
-
     return render_template('login.html', form=form)
 
 @app.route('/logout')
@@ -170,13 +190,8 @@ def logout():
     flash('You have been logged out.', 'success')
     return redirect(url_for('homepage1'))
 
-    # Flash a message to indicate successful logout (optional)
-    flash('You have been logged out.', 'success')
-
-    # Redirect the user to the homepage or login page
-    return redirect(url_for('homepage1'))
-
 @app.route('/admin')
+@login_required
 def admin_dashboard():
     # Fetch all donations from the database and pass them to the template
     all_donations = Donation.query.all()
@@ -199,7 +214,8 @@ def communication():
 
     return render_template('communication.html')
 
-@app.route('/admin/questions')
+@app.route('/admin_questions')
+@login_required
 def admin_questions():
     # Retrieve all user questions from the database
     user_questions = UserQuestion.query.all()
@@ -211,3 +227,5 @@ if __name__ == '__main__':
     # Create the database table
     with app.app_context():
         db.create_all()
+        
+

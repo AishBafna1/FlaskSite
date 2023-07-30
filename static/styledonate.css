@@ -1,9 +1,7 @@
-/* styles.css */
 
-/* Form Container */
-body {
+ body {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color: #94447c2b;
+    background-color: #bcede92b;
   }
 
  .form-container {
@@ -30,24 +28,6 @@ body {
     margin-left: auto;
   }
   
-  .side-animation {
-    position: absolute;
-    top: 150px;
-    left: 10px;
-    width: 430px; /* Adjust the width as per your image size */
-    height: 500px; /* Adjust the height as per your image size */
-  }
-  .image-container {
-    position: absolute;
-    top: 150px; /* Adjust the top positioning as needed */
-    right: 10px; /* Adjust the right positioning as needed */
-  }
-  
-  .corner-image {
-    width: 430px; /* Adjust the width of the image as needed */
-    height: 480px;
-  }
-  
   /* Form Title */
   .form-title {
     font-size: 28px;
@@ -57,11 +37,10 @@ body {
  .donation-form {
     width: 500px;
     padding: 30px;
-    background-color: #f8f9fa;
+    background-color: #f6e3ee;
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
   
   .form-group {
     margin-bottom: 15px;
@@ -82,7 +61,7 @@ body {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #94447c;
+    background-color: #762d5c;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -103,12 +82,10 @@ body {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-
-  
-  
   .btn-primary:hover {
     background-color: #762d5c;
- }
+    }
+
  .sliding-text-container {
     overflow: hidden;
     position: relative;

@@ -1,100 +1,45 @@
+/* styles.css */
+
 body {
     font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
     margin: 0;
     padding: 0;
   }
   
   h1, h2 {
     text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    border: 1px solid #ddd;
     padding: 20px;
-    margin-bottom: 20px;
   }
   
-  strong {
-    font-weight: bold;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
   }
   
-  /* Navbar */
-  .navbar {
-    background-color: #343a40;
-    color: #fff;
-    padding: 10px 20px;
-  }
-  
-  .navbar-brand {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .nav-link {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 20px;
-  }
-  
-  .nav-link:hover {
-    color: #eee;
-  }
-  
-  /* Admin Dashboard */
-  .admin-dashboard {
-    margin: 20px;
-  }
-  
-  .admin-dashboard h1 {
-    font-size: 36px;
-  }
-  
-  .admin-dashboard h2 {
-    font-size: 28px;
-  }
-  
-  /* User Questions */
-  ul.user-questions li {
-    background-color: #f8f9fa;
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  ul.user-questions li strong {
-    font-weight: bold;
-  }
-  
-  ul.user-questions li:nth-child(even) {
-    background-color: #e9ecef;
-  }
-  
-  ul.user-questions li:last-child {
-    margin-bottom: 0;
-  }
-  
-  /* Flash Messages */
-  .alert {
-    margin-top: 20px;
-  }
-  
-  .alert-success {
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-    color: #155724;
-  }
-  
-  /* Footer */
-  footer {
-    background-color: #f8f9fa;
-    color: #212529;
+  th, td {
     padding: 10px;
-    text-align: center;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #ffc0cb; /* Pink color for table titles */
+    color: #fff; /* White text color for table titles */
+  }
+  
+  thead {
+    background-color: #f2f2f2;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tbody tr:hover {
+    background-color: #ddd;
   }
   
