@@ -36,8 +36,22 @@
       </p>
     </div>
 
-    <div class="square">
-      <!-- You can add an image or any content you want inside this square -->
+    <div class="horizontal-bar">
+      <div class="image">
+        <img
+          src="{{ url_for('static', filename='Images/hand2.avif') }}"
+          alt="Image"
+        />
+      </div>
+      <div class="text">
+        <p class="left-align">
+          “There is no exercise better for the heart than <br />reaching down
+          and lifting people up.” <br />— John Holmes<br />
+
+          <br />
+          "We can build a brighter tomorrow for those in need."
+        </p>
+      </div>
     </div>
 
     <div class="history">
@@ -57,5 +71,8 @@
         and together, we can shape a brighter tomorrow.
       </p>
     </div>
+    <footer class="bg-light text-center py-3">
+      <p>&copy; 2023 Attireforhumanity. All rights reserved.</p>
+    </footer>
   </body>
 </html>

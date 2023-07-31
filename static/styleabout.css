@@ -3,8 +3,9 @@
 /* Header styles */
 header {
     text-align: center;
-    padding: 20px;
-    background-color: #ebdfe7;
+    padding: 2px;
+    background-color: #4e0636;
+    width: 100%;
 }
 
 /* Common styles for mission, impact, and history sections */
@@ -18,17 +19,38 @@ header {
     font-size: 24px;
 
   }
-/* Square styles */
-.square {
-    width: 150px;
-    height: 150px;
-    background-color: #ccc; /* Replace with your desired color */
-    margin: 0 auto;
+
+
+  .horizontal-bar {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+    justify-content: center; /* Align the items horizontally in the center */
+    align-items: center; /* Align the items vertically in the center */
+    width: 100%; /* Make the horizontal bar cover the entire width of the page */
+    background-color: #5355c9; /* Optional: Add a background color */
+  }
+  
+  .left-align {
+    color: white; /* Set the text color to white */
 }
+
+  .image {
+    padding: 5px; /* Optional: Add padding around the image */
+    margin-left: 180px;
+  }
+  
+  .image img {
+    width: 60%;
+    height: auto;
+  }
+  
+  .text {
+    padding: 1px; /* Optional: Add padding around the text */
+    color: #ffffff;
+    font-size: 50px;
+    text-align: left;
+    margin-right: 120px;
+  }
+  
 
 /* Styling h2 and p elements */
 h2 {
@@ -40,3 +62,10 @@ p {
     font-size: 26px;
     color: #000000; /* Replace with your desired color */
 }
+/* Footer */
+footer {
+    background-color: #fdd2d2;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+  }
