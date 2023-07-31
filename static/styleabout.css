@@ -1,0 +1,42 @@
+/* Add your CSS styles here to customize the appearance */
+
+/* Header styles */
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #ebdfe7;
+}
+
+/* Common styles for mission, impact, and history sections */
+.mission, .impact, .history {
+    padding: 20px;
+    text-align: center;
+
+}
+
+.mission p, .impact p, .history p {
+    font-size: 24px;
+
+  }
+/* Square styles */
+.square {
+    width: 150px;
+    height: 150px;
+    background-color: #ccc; /* Replace with your desired color */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Styling h2 and p elements */
+h2 {
+    font-size: 40px;
+    color: #94447c; /* Replace with your desired color */
+}
+
+p {
+    font-size: 26px;
+    color: #000000; /* Replace with your desired color */
+}

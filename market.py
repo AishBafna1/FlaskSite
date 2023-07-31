@@ -4,6 +4,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
 from flask_login import LoginManager,UserMixin, login_user, login_required, logout_user, current_user
+from flask_oauthlib.client import OAuth
+
 
 
 from flask_sqlalchemy import SQLAlchemy
@@ -213,6 +215,10 @@ def communication():
         return redirect(url_for('communication'))
 
     return render_template('communication.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.route('/admin_questions')
 @login_required
