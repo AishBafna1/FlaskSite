@@ -101,6 +101,11 @@ def dashboard():
     # Render the user dashboard page
     return render_template('dashboard.html')
 
+@app.route('/about')
+def about():
+    # Render the user dashboard page
+    return render_template('about.html')
+
 @app.route('/donations')
 @login_required
 def donate():
