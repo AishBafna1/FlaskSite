@@ -14,6 +14,9 @@
   </head>
   <body>
     <div class="container">
+      {% with messages = get_flashed_messages() %} {% for message in messages %}
+      <div class="alert alert-success">{{ message }}</div>
+      {% endfor %} {% endwith %}
       <h1>Login</h1>
       <!-- Your login form goes here -->
       <form method="POST" action="{{ url_for('login') }}">

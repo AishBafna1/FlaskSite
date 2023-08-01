@@ -146,7 +146,7 @@ def submit_donation():
             db.session.add(donation)
             db.session.commit()
 
-            flash('Donation successfully submitted!', 'success')  # Flash the success message
+            flash('Donation successfully submitted!', 'donation_success')  # Flash the success message
             return redirect(url_for('donate'))  # Redirect to the donations page
         else:
             flash('Please fill in all required fields', 'error')  # Flash an error message for incomplete form
@@ -154,26 +154,21 @@ def submit_donation():
     return render_template('donate.html')
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():
-    print("Login route accessed.")  # Add this print statemen
-        
+def login():        
     form = LoginForm()
 
     if form.validate_on_submit():
         # Process the login form data and check credentials
         email = form.email.data
         password = form.password.data
-        print("Form submitted")  # Add this print statement to check if form is being submitted
 
 
         # Check if the entered credentials belong to the admin user
         if email == 'admin@gmail.com' and password == 'admin123':
-            flash('Admin login successful!', 'success')
+            flash('Admin login successful!', 'login_success')
             admin_user = User.query.filter_by(email=email).first()
             login_user(admin_user)  # Log in the admin user
             if current_user.is_authenticated:
-                print("Regular user authenticated.")  # Add this print statement
-
                 return redirect(url_for('admin_dashboard'))  # Redirect to the admin dashboard
 
         # Validate regular user credentials against the database
@@ -181,7 +176,7 @@ def login():
 
         if user and user.password == password:
             # Successful login
-            flash('Login successful!', 'success')
+            flash('Login successful!', 'login_success')
             login_user(user)  # Log in the regular user
             if current_user.is_authenticated:
                 return redirect(url_for('dashboard'))  # Redirect to the regular user's dashboard

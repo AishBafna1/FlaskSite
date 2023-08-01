@@ -60,6 +60,11 @@
       </div>
     </div>
     <div class="form-container">
+      {% with messages =
+      get_flashed_messages(category_filter=['donation_success', 'error']) %} {%
+      for message in messages %}
+      <div class="alert alert-success">{{ message }}</div>
+      {% endfor %} {% endwith %}
       <h1 class="form-title">SUBMIT NEW DONATION (HAPPINESS)</h1>
       {% with messages = get_flashed_messages() %} {% if messages %}
       <div id="success-alert" class="alert alert-success" role="alert">
