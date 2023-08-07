@@ -4,6 +4,10 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
 from flask_login import LoginManager,UserMixin, login_user, login_required, logout_user, current_user
+from flask_bcrypt import Bcrypt
+from flask_bcrypt import generate_password_hash, check_password_hash
+
+
 
 
 from flask_sqlalchemy import SQLAlchemy
@@ -11,6 +15,9 @@ app = Flask(__name__)
 app.secret_key = '123'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
 db = SQLAlchemy(app)
+
+bcrypt = Bcrypt(app)
+
 
 # Setup Flask-Login
 login_manager = LoginManager()
@@ -35,8 +42,11 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
     
-    def is_active(self):
-        return self.active  # Replace 'active' with the actual attribute/method that determines if the user is active
+    def set_password(self, password):
+        self.password = generate_password_hash(password).decode('utf-8')
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
     
 class Donation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -86,8 +96,10 @@ def register():
         if existing_user:
             flash('Email already exists. Please use a different email.', 'error')
         else:
+            # Hash the password using Flask-Bcrypt
+            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
             # Create a new user and add it to the database
-            new_user = User(full_name=full_name, email=email, password=password)
+            new_user = User(full_name=full_name, email=email, password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
             flash('Registration successful!', 'success')
@@ -154,7 +166,7 @@ def submit_donation():
     return render_template('donate.html')
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():        
+def login():
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -162,19 +174,18 @@ def login():
         email = form.email.data
         password = form.password.data
 
-
         # Check if the entered credentials belong to the admin user
-        if email == 'admin@gmail.com' and password == 'admin123':
-            flash('Admin login successful!', 'login_success')
+        if email == 'admin@gmail.com':
             admin_user = User.query.filter_by(email=email).first()
-            login_user(admin_user)  # Log in the admin user
-            if current_user.is_authenticated:
+            if admin_user and bcrypt.check_password_hash(admin_user.password, password):
+                flash('Admin login successful!', 'login_success')
+                login_user(admin_user)  # Log in the admin user
                 return redirect(url_for('admin_dashboard'))  # Redirect to the admin dashboard
 
         # Validate regular user credentials against the database
         user = User.query.filter_by(email=email).first()
 
-        if user and user.password == password:
+        if user and bcrypt.check_password_hash(user.password, password):
             # Successful login
             flash('Login successful!', 'login_success')
             login_user(user)  # Log in the regular user
@@ -182,7 +193,9 @@ def login():
                 return redirect(url_for('dashboard'))  # Redirect to the regular user's dashboard
         else:
             flash('Invalid email or password', 'error')
+
     return render_template('login.html', form=form)
+
 
 @app.route('/logout')
 def logout():
